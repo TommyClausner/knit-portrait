@@ -1,6 +1,6 @@
-from string_portrait.image_processing import pre_proc_img, make_circle
-from string_portrait.optimize import fit_strings
-from string_portrait.IO import save_string_order, save_config
+from knit_portrait.image_processing import pre_proc_img, make_circle
+from knit_portrait.optimize import fit_strings
+from knit_portrait.IO import save_string_order, save_config
 import argparse
 
 

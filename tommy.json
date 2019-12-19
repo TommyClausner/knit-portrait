@@ -1,1 +1,1 @@
-{"image": {"file": "./tommy.jpg", "size": 2500, "crop_factor": 1.0}, "settings": {"hooks": 201, "strings": 5000, "discount": 0.3, "distance": 15, "random_accept": 0, "save_file": "./tommy"}}
+{"image": {"file": "./tommy.jpg", "size": 2500, "crop_factor": 1.0}, "settings": {"hooks": 201, "strings": 5000, "discount": 0.3, "distance": 15, "random_accept": 0.0, "save_file": "./tommy"}}

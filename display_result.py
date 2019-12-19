@@ -1,6 +1,6 @@
 import matplotlib.pylab as plt
-from string_portrait.IO import load_string_order, load_config
-from string_portrait.image_processing import pre_proc_img, make_circle
+from knit_portrait.IO import load_string_order, load_config
+from knit_portrait.image_processing import pre_proc_img, make_circle
 import argparse
 
 
