@@ -61,6 +61,10 @@ Example:
 
 `python compute_string_order.py -f ./tommy.jpg -sa ./tommy -s 2500 -cf 1 -st 5000 -ho 201 -d 0.3 -nd 15 -r 0`
 
+or short for this example:
+
+`python compute_string_order.py`
+
 The above example is composed of all default values. It will take "tommy.jpg", resize it to 2500 x 2500px, crop it by a factor of 1 (no cropping) and compute 5000 strings for 201 hooks. Furthermore no random strings are set (`-r 0`) and a minimum distance of 15 hooks to find the next best hook will be applied. Once a thread was "drawn", the pixel values python compute_string_order.pyon this line will be multiplied by 0.3 to discount them for the next iteration.
 
 Afterwards calling `python display_result.py tommy.json -st 2500` will display the original next to the knitted portrait using the first 2500 strings. 
