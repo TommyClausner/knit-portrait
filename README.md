@@ -67,7 +67,7 @@ or short for this example:
 
 The above example is composed of all default values. It will take "tommy.jpg", resize it to 2500 x 2500px, crop it by a factor of 1 (no cropping) and compute 5000 strings for 201 hooks. Furthermore no random strings are set (`-r 0`) and a minimum distance of 15 hooks to find the next best hook will be applied. Once a thread was "drawn", the pixel values python compute_string_order.pyon this line will be multiplied by 0.3 to discount them for the next iteration.
 
-Afterwards calling `python display_result.py tommy.json -st 2500` will display the original next to the knitted portrait using the first 2500 strings. 
+Afterwards calling `python display_result.py tommy.json -st 3000` will display the original next to the knitted portrait using the first 2500 strings. 
 
 Since it is not desirable to recompute the entire order, it is advisable to precompuet more strings than probably needed in order to play around with the amout for displaying and thus result selection.
 
