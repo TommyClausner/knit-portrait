@@ -74,3 +74,5 @@ Since it is not desirable to recompute the entire order, it is advisable to prec
 Here is the example result from above:
 
 ![Image of knitted Tommy](https://github.com/TommyClausner/knit-portrait/blob/master/tommy_result.jpg)
+
+Depending on the contrast of the original image, as well as on the specifications for the computations, results may vary strongly.
