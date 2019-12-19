@@ -69,4 +69,4 @@ Since it is not desirable to recompute the entire order, it is advisable to prec
 
 Here is the example result from above:
 
-![Image of knitted Tommy](https://github.com/tommyclausner/knit-portrait/tommy_result.jpg)
+![Image of knitted Tommy](https://github.com/TommyClausner/knit-portrait/blob/master/tommy_result.jpg)
