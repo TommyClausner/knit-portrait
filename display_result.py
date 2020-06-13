@@ -92,21 +92,25 @@ def main():
         textx = hook[0] - config['image']['size'] / 2
         texty = hook[1] - config['image']['size'] / 2
 
-        checked = False
         rotation = 0
-        threshold = 1 - 1 / config['settings']['hooks'] * 4
+        if config['settings']['rectangle']:
+            checked = False
+            threshold = 1 - 1 / config['settings']['hooks'] * 4
 
-        if (texty >= (config['image']['size'] / 2 * threshold)) | (
-                texty <= (-config['image']['size'] / 2 * threshold)):
-            texty *= 1.05
-            rotation = 90
-            checked = True
+            if (texty >= (config['image']['size'] / 2 * threshold)) | (
+                    texty <= (-config['image']['size'] / 2 * threshold)):
+                texty *= 1.05
+                rotation = 90
+                checked = True
 
-        if ((textx >= (config['image']['size'] / 2 * threshold)) | (
-                textx <= (-config['image']['size'] / 2 * threshold))) & (
-                not checked):
+            if ((textx >= (config['image']['size'] / 2 * threshold)) | (
+                    textx <= (-config['image']['size'] / 2 * threshold))) & (
+                    not checked):
+                textx *= 1.05
+                rotation = 0
+        else:
             textx *= 1.05
-            rotation = 0
+            texty *= 1.05
 
         plt.text(textx, texty, number, fontsize='xx-small', ha='center',
                  va='center', rotation=rotation)
