@@ -28,7 +28,8 @@ def no_search(start_ind, hook_dist, num_hooks):
         return list(range(search_frame[0], search_frame[1])) + [start_ind]
 
 
-def fit_strings(img, hook_circle, start_ind=42, num_strings=1500, hook_dist=5, discount=0.1, random_accept=0):
+def fit_strings(img, hook_circle, start_ind=42, num_strings=1500, hook_dist=5,
+                discount=0.1, random_accept=0):
     hook_order = []
     img = np.abs(img - 1)
     for string_num in range(num_strings):
@@ -49,7 +50,8 @@ def fit_strings(img, hook_circle, start_ind=42, num_strings=1500, hook_dist=5, d
                 if np.random.random() < random_accept:
                     best_ind = [start_ind, start_ind]
                     while best_ind[1] == start_ind:
-                        best_ind = [start_ind, np.random.randint(0, len(hook_circle))]
+                        best_ind = [start_ind,
+                                    np.random.randint(0, len(hook_circle))]
                     break
                 else:
                     best_avg, best_ind = avg, [start_ind, ind]

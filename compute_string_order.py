@@ -1,7 +1,9 @@
-from knit_portrait.image_processing import pre_proc_img, make_circle
-from knit_portrait.optimize import fit_strings
-from knit_portrait.IO import save_string_order, save_config
 import argparse
+
+from knit_portrait.IO import save_string_order, save_config
+from knit_portrait.image_processing import pre_proc_img, make_circle, \
+    make_rectangle
+from knit_portrait.optimize import fit_strings
 
 
 def main():
@@ -32,21 +34,35 @@ def main():
                         help='minimum hook distance (default=15)')
 
     parser.add_argument('-r', '--random_accept_rate', default=0, type=float,
-                        help='randomly make a tring with this probability (default=0)')
+                        help='randomly make a tring with this probability '
+                             '(default=0)')
+
+    parser.add_argument('-rec', '--rectangle', action="store_true",
+                        help='add if rectangle rather than circle')
 
     args = parser.parse_args()
 
-    config = {'image': {'file': args.file, 'size': args.size, 'crop_factor': args.crop_factor},
-              'settings': {'hooks': args.hooks, 'strings': args.strings, 'discount': args.discount,
-                           'distance': args.neighbor_distance, 'random_accept': args.random_accept_rate,
-                           'save_file': args.save_as}}
+    config = {'image': {'file': args.file, 'size': args.size,
+                        'crop_factor': args.crop_factor},
+              'settings': {'hooks': args.hooks, 'strings': args.strings,
+                           'discount': args.discount,
+                           'distance': args.neighbor_distance,
+                           'random_accept': args.random_accept_rate,
+                           'save_file': args.save_as,
+                           'rectangle': args.rectangle}}
 
-    ref_img = pre_proc_img(args.file, args.size, args.crop_factor)
-    circle = make_circle(ref_img, num_hooks=args.hooks)
+    ref_img = pre_proc_img(args.file, args.size, args.crop_factor,
+                           args.rectangle)
+    if args.rectangle:
+        shape, num_hooks = make_rectangle(
+            tuple([val - 1 for val in ref_img.shape]),
+            num_hooks=args.hooks)
+    else:
+        shape = make_circle(ref_img.shape, num_hooks=args.hooks)
 
     string_order = fit_strings(
         ref_img,
-        circle,
+        shape,
         hook_dist=args.neighbor_distance,
         discount=args.discount,
         num_strings=args.strings,
