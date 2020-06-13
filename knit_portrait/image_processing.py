@@ -31,18 +31,22 @@ def make_rectangle(rect_shape, num_hooks=250, offset=0):
     :return: np.array of rectangle coordinates (x, y)
     """
 
-    hooks_per_x = rect_shape[0] / (
-            rect_shape[0] + rect_shape[1]) * num_hooks / 2
-    hooks_per_y = rect_shape[1] / (
-            rect_shape[0] + rect_shape[1]) * num_hooks / 2
+    hooks_per_x = int(np.ceil(rect_shape[0] / (
+            rect_shape[0] + rect_shape[1]) * num_hooks / 2))
+    hooks_per_y = int(np.ceil(rect_shape[1] / (
+            rect_shape[0] + rect_shape[1]) * num_hooks / 2))
 
-    # make edges non-symmetric to avoid symmetry patterns in the final result
-    first_edge_x = np.linspace(0.0, rect_shape[0], int(np.ceil(hooks_per_x)))
-    second_edge_x = np.linspace(0.0, rect_shape[0],
-                                int(np.ceil(hooks_per_x)) - 1)
-    first_edge_y = np.linspace(0.0, rect_shape[1], int(np.ceil(hooks_per_y)))
-    second_edge_y = np.linspace(0.0, rect_shape[1],
-                                int(np.ceil(hooks_per_y)) - 1)
+    first_edge_x = np.linspace(0.0, rect_shape[0], hooks_per_x)
+
+    first_edge_y = np.linspace(0.0, rect_shape[1], hooks_per_y)
+
+    hooks_per_x2 = int(np.ceil(
+        rect_shape[0] / (rect_shape[0] + rect_shape[1]) * (
+                    num_hooks - hooks_per_x - hooks_per_y)))
+    hooks_per_y2 = num_hooks - hooks_per_x - hooks_per_y - hooks_per_x2
+
+    second_edge_x = np.linspace(0.0, rect_shape[0], hooks_per_x2)
+    second_edge_y = np.linspace(0.0, rect_shape[1], hooks_per_y2)
 
     rectangle = [[x, 0] for x in first_edge_x]
     rectangle += [[first_edge_x[-1], y] for y in first_edge_y]

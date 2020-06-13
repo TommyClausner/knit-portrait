@@ -7,6 +7,10 @@ from knit_portrait.image_processing import pre_proc_img, make_circle, \
     make_rectangle
 
 
+def sign(number):
+    return ((number > 0) + 0) - ((number < 0) + 0)
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('-st', '--strings', default=-1, type=int,
@@ -66,10 +70,9 @@ def main():
                  args.color, LineWidth=args.line)
         plt.gca()
         string_length += ((shape[string_pair[0], 1] - shape[
-            string_pair[1], 1]) ** 2 + (shape[string_pair[0], 0] - shape[
-                              string_pair[1], 0]
-                          ) ** 2) ** 0.5 / config['image'][
-                             'size'] * 2 * args.radius
+            string_pair[1], 1]) ** 2 + (
+                shape[string_pair[0], 0] - shape[string_pair[1], 0]) ** 2
+                          ) ** 0.5 / config['image']['size'] * 2 * args.radius
     plt.axis('equal')
     plt.axis('off')
     plt.gca().invert_yaxis()
@@ -80,6 +83,41 @@ def main():
     print('A radius of {} mm, using {} strings, '
           'will require {} m string'.format(args.radius,
                                             num_strings, string_length / 1000))
+
+    plt.figure(figsize=(16, 9))
+    for number, hook in enumerate(shape):
+        plt.scatter(hook[0] - config['image']['size'] / 2,
+                    hook[1] - config['image']['size'] / 2,
+                    c='black', marker='x')
+        textx = hook[0] - config['image']['size'] / 2
+        texty = hook[1] - config['image']['size'] / 2
+
+        checked = False
+        rotation = 0
+        threshold = 1 - 1 / config['settings']['hooks'] * 4
+
+        if (texty >= (config['image']['size'] / 2 * threshold)) | (
+                texty <= (-config['image']['size'] / 2 * threshold)):
+            texty *= 1.05
+            rotation = 90
+            checked = True
+
+        if ((textx >= (config['image']['size'] / 2 * threshold)) | (
+                textx <= (-config['image']['size'] / 2 * threshold))) & (
+                not checked):
+            textx *= 1.05
+            rotation = 0
+
+        plt.text(textx, texty, number, fontsize='xx-small', ha='center',
+                 va='center', rotation=rotation)
+    plt.axis('equal')
+    plt.axis('off')
+    plt.gca().invert_yaxis()
+    plt.savefig(
+        config['settings']['save_file'] + '_result_{}_drill_'
+                                          'template.jpg'.format(num_strings),
+        dpi=args.dpi, facecolor=args.background)
+    plt.show()
 
 
 if __name__ == '__main__':
