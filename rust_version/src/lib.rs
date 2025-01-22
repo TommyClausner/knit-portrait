@@ -13,7 +13,7 @@
 //! 2. **`output_csv`**: Path to the output CSV file where the string connections will be stored.
 //! 3. **`hooks`**: Number of hooks (points) along the circle (default: 201).
 //! 4. **`strings`**: Number of strings to compute (default: 5000).
-//! 5. **`contrast_multiplier`**: Factor to adjust string brightness (default: 0.3).
+//! 5. **`contrast_multiplier`**: Factor to adjust string brightness (default: 0.7).
 //! 6. **`neighbour_dist`**: Minimum distance between two hooks (default: 15).
 //!
 //! ## Functions
@@ -38,7 +38,7 @@
 //!     output: "tommy.csv".to_string(),
 //!     hooks: 201,
 //!     strings: 5000,
-//!     contrast_change: 0.3,
+//!     contrast_change: 0.7,
 //!     neighbour_dist: 15,
 //! };
 //!
@@ -141,7 +141,7 @@ impl Config {
 
         let contrast_change = args
             .next()
-            .unwrap_or_else(|| "0.3".parse().unwrap())
+            .unwrap_or_else(|| "0.7".parse().unwrap())
             .parse::<f64>()
             .unwrap();
 
