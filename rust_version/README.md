@@ -29,7 +29,7 @@ NEIGHBOR_DISTANCE=15 #(optional; default is 15)
 ```
 
 All arguments must be specified in this order. To e.g. provide 
-NEIGHBOR_DISTANCE, all previous arguments must be provided as well.
+`NEIGHBOR_DISTANCE`, all previous arguments must be provided as well.
 
 ## Results
 The result is compatible with the Python version and can thus be used 
