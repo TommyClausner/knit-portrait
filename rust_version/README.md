@@ -62,3 +62,5 @@ plt.tight_layout()
 plt.gca().invert_yaxis()
 plt.show()
 ```
+
+A documentation can be compiled using `cargo doc --open`.
